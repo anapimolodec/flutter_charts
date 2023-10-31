@@ -6,7 +6,7 @@ class LineChartSample2 extends StatefulWidget {
   final RequestType requestType;
   const LineChartSample2({
     super.key,
-    this.requestType = RequestType.YEAR,
+    this.requestType = RequestType.LAST_MONTH,
   });
 
   @override
@@ -47,27 +47,13 @@ class _LineChartSample2State extends State<LineChartSample2> {
       color: Color(0xFF666666),
     );
 
-    List<String> labels = [
-      '1월',
-      '2월',
-      '3월',
-      '4월',
-      '5월',
-      '6월',
-      '7월',
-      '8월',
-      '9월',
-      '10월',
-      '11월',
-      '12월'
-    ];
-
+    List<String> labels;
     int interval = 1;
 
     switch (widget.requestType) {
       case RequestType.LAST_HOUR:
         labels = List.generate(60, (index) => '${index}분');
-        interval = 5; // 5분 주기로 표시
+        interval = 10; // 5분 주기로 표시
         break;
       case RequestType.TODAY:
         labels = List.generate(24, (index) => '${index}시');
@@ -81,7 +67,20 @@ class _LineChartSample2State extends State<LineChartSample2> {
         interval = 5; // 5일 주기로 표시
         break;
       case RequestType.YEAR:
-        interval = 2;
+        labels = [
+          '1월',
+          '2월',
+          '3월',
+          '4월',
+          '5월',
+          '6월',
+          '7월',
+          '8월',
+          '9월',
+          '10월',
+          '11월',
+          '12월'
+        ];
         break;
     }
 
@@ -155,7 +154,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
         show: true,
         drawVerticalLine: true,
         horizontalInterval: 1,
-        verticalInterval: 1,
+        verticalInterval: 5,
         getDrawingHorizontalLine: (value) {
           return const FlLine(
             color: Color(0xFFC6C6C6),
@@ -199,7 +198,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
         border: Border.all(color: const Color(0xff37434d)),
       ),
       minX: 0,
-      maxX: 11,
+      maxX: 30,
       minY: 0,
       maxY: 10,
       lineBarsData: [
